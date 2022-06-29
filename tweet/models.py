@@ -8,6 +8,9 @@ class User(AbstractUser):
 
     REQUIRED_FIELDS = ['email']
 
+    def __str__(self):
+        return f'{self.username}: {self.email}'
+
 
 class Tweet(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -16,4 +19,7 @@ class Tweet(models.Model):
     like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="likes")
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
+
+    def __str__(self):
+        return self.tweet_text
