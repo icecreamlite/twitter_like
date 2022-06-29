@@ -6,7 +6,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     following = models.ManyToManyField('self', related_name='followers', symmetrical=False, blank=True)
 
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ['email', 'password']
 
     def __str__(self):
         return f'{self.username}: {self.email}'
