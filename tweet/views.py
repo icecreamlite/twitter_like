@@ -10,11 +10,7 @@ from .permissions import IsOwnerOrReadOnly, IsUserOrReadOnly
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly]
-
-    # TODO: Let anon user create an account
-    # Prevent user from modifying account for now
-
+    permission_classes = [IsUserOrReadOnly]
 
     @action(detail=True, permission_classes=[permissions.IsAuthenticated], methods=['post'])
     def follow_unfollow(self, request, *args, **kwargs):
